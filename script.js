@@ -6,7 +6,7 @@
 		
 
 		//clear textarea
-		 document.getElementById("final-textbox").value = "";
+		document.getElementById("final-textbox").value = "";
 
 
 		//get form values
@@ -28,7 +28,7 @@
 
 		//Set XML heading
 		document.getElementById('final-textbox').value += '<?xml version="1.0" encoding="UTF-8"?>' + '\r\n' + '<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31" library-id="iRobotSharedLibrary">' + '\r\n'
-		
+		var pageIDListAlert = pageIDRaw.split(',');
 		var pageIDNoSpace = pageIDRaw.replace(/\s/g, '');
 		var pageIDList = pageIDNoSpace.split(',');
 
@@ -37,7 +37,8 @@
 		//check to see if page id is in XML
 		var xmlCodeCheck = xmlCodeRaw.includes('<content content-id="' + pageIDList[i] + '">');
 		if(xmlCodeCheck != true){
-			alert(pageIDList[i] + ' is not a valid page ID');
+			alert(pageIDListAlert[i] + ' is not a valid page ID');
+			document.getElementById("final-textbox").value = "";
 
 		}else{
 
@@ -105,13 +106,12 @@
 		}
 	}
 
+	}
 		//Set XML footer
 		document.getElementById('final-textbox').value += '</library>'
 
 		//display create button 
 		document.getElementById('create').style.display = 'block';
-	}
-
 		e.preventDefault(formReturn)
 
 
