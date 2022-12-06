@@ -15,15 +15,23 @@
 <div class="generator-container">
 	<div class="slide-generator">
 		<form id="xmlCleaner-form">
+			<label id="fileNameLabel" for="fileName">Enter file Name</label><br/>
+	   		<input type="text" id="fileName" value="sfra_xml_export.xml"><br/>
 			<label id="xmlPageIDLabel" for="pageID">List page IDs here separated by commas</label><br/>
 	      	<textarea id="pageID"></textarea><br/>
-	      	<label id="xmlCodeLabel" for="xmlCode">Paste XML Code from Dev export</label><br/>
+	      	<label id="xmlCodeLabel" for="xmlCode">Paste XML code from dev export</label><br/>
 	      	<textarea id="xmlCode"></textarea> <br/>
 	      	<button onclick="get_values(event)" id="btn" class="btn">Submit</button>
 	  	</form>
 	  </div>
 	  <div class="code-block">
-	   <textarea id="final-textbox"></textarea> <button onclick="createFile()" id="create">Create file</button> <a download="xmltest.xml" id="downloadlink" style="display: none">Download</a>
+	   <textarea id="final-textbox"></textarea>
+	  <!--  <form id="fileNameForm">
+	   		
+	   		<button onclick="get_values(event)" id="fileBTN" class="btn">Create file</button>
+	   </form> -->
+	   <button onclick="createFile()" id="create" style="display: none;">Create file</button> 
+	   <span id="download-button-area"><a download="xmltest.xml" id="downloadlink" style="display: none">Download</a></span>
 	  </div>
 </div>
 </div> 

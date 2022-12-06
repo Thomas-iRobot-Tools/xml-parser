@@ -3,12 +3,28 @@
 	function get_values(e){
 		document.querySelector("form").addEventListener("submit", get_values );
 		var formReturn = document.getElementById('xmlCleaner-form');
-		//note for scaling, text area input separated by commas, remove spacing and then split variable and do a for loop for each page. 
+		
+
+		//clear textarea
+		 document.getElementById("final-textbox").value = "";
 
 
 		//get form values
 		const xmlCodeRaw = document.getElementById("xmlCode").value;
 		const pageIDRaw = document.getElementById("pageID").value;
+		const xmlFileNameRaw = document.getElementById("fileName").value;
+
+		//set file name
+
+		if(xmlFileNameRaw.includes(".xml") != true){
+			var xmlFileName = xmlFileNameRaw.replace(/\s/g, '_') + '.xml';
+			document.getElementById('download-button-area').innerHTML = '<a download="' + xmlFileName + '" id="downloadlink" style="display: none">Download</a></span>';
+			// console.log(xmlFileName)
+		}else{
+			var xmlFileName = xmlFileNameRaw.replace(/\s/g, '_');
+			document.getElementById('download-button-area').innerHTML = '<a download="' + xmlFileName + '" id="downloadlink" style="display: none">Download</a></span>';
+			// console.log(xmlFileName)
+		}
 
 		//Set XML heading
 		document.getElementById('final-textbox').value += '<?xml version="1.0" encoding="UTF-8"?>' + '\r\n' + '<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31" library-id="iRobotSharedLibrary">' + '\r\n'
@@ -17,6 +33,13 @@
 		var pageIDList = pageIDNoSpace.split(',');
 
 		for (let i = 0; i < pageIDList.length; i++) {
+
+		//check to see if page id is in XML
+		var xmlCodeCheck = xmlCodeRaw.includes('<content content-id="' + pageIDList[i] + '">');
+		if(xmlCodeCheck != true){
+			alert(pageIDList[i] + ' is not a valid page ID');
+
+		}else{
 
 		//get page xml
 		var xmlCodeSplit = xmlCodeRaw.split('<content content-id="' + pageIDList[i] + '">');
@@ -85,6 +108,9 @@
 		//Set XML footer
 		document.getElementById('final-textbox').value += '</library>'
 
+		//display create button 
+		document.getElementById('create').style.display = 'block';
+	}
 
 		e.preventDefault(formReturn)
 
