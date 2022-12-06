@@ -39,6 +39,7 @@
 		if(xmlCodeCheck != true){
 			alert(pageIDListAlert[i] + ' is not a valid page ID');
 			document.getElementById("final-textbox").value = "";
+			break;
 
 		}else{
 
